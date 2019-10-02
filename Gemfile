@@ -41,6 +41,7 @@ group :development, :test do
   gem "rubocop", require: false
   gem "rubocop-performance"
   gem "shoulda-matchers", "~> 4.1"
+  gem "coveralls", require: false
 end
 
 group :development do
