@@ -6,7 +6,7 @@ jobs:
     docker:
       - image: circleci/ruby:2.6.4
         environment:
-          - DB_HOST=127.0.0.1
+          - DB_HOST=localhost
 
       - image: circleci/mysql:latest
         environment:
@@ -36,8 +36,8 @@ jobs:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
       # Database setup
-      - run: bundle exec rake db:create
-      - run: bundle exec rake db:schema:load
+      - run: RAILS_ENV=test bundle exec rake db:create
+      - run: RAILS_ENV=test bundle exec rake db:schema:load
 
       # run tests!
       - run:
