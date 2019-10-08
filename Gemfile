@@ -37,7 +37,6 @@ group :development, :test do
   gem "guard-rspec"
   gem "guard-rubocop"
   gem "pry"
-  gem "rspec-rails", "~> 3.8"
   gem "rubocop", require: false
   gem "rubocop-performance"
   gem "shoulda-matchers", "~> 4.1"
@@ -48,6 +47,12 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
+end
+
+group :test do
+  gem "rspec_junit_formatter"
+  gem "rspec-rails", "~> 3.8"
+  gem "coveralls", require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
