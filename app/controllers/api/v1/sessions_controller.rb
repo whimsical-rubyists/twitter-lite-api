@@ -9,7 +9,11 @@ class Api::V1::SessionsController < Api::V1::ApiController
     # binding.pry
     if @user && @user.authenticate(sign_in_params[:password])
       log_in(@user)
-      render json: { message: "User logged in successfully" }, status: :ok
+      render json: { 
+        message: "User logged in successfully",
+        username: @user.username,
+        email: @user.email 
+      }, status: :ok
     else
       render json: { errors: ["Username or Password provided is wrong"] }, status: :unauthorized
     end

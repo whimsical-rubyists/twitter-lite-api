@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::V1::IndexController < ApplicationController
+class Api::V1::IndexController < Api::V1::ApiController
   def index
     render json: "Welcome to Twitter Lite"
   end

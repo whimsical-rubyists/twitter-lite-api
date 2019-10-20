@@ -2,14 +2,13 @@
 
 module Api
   class ApiController < ApplicationController
-    include SessionsHelpers
-
     before_action :authenticate_request
 
     private
 
     def authenticate_request
-      logged_in?
+      return if logged_in?
+      render json: { "message": "You are not authenticated, kindly login first." }, status: :unauthorized
     end
   end
 end
