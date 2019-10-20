@@ -55,7 +55,7 @@ Rails.application.configure do
     g.test_framework :rspec
     g.fixture_replacement :factory_bot
     g.factory_bot dir: 'spec/factories'
-    g.controller_specs true
+    g.controller_specs false
     g.request_specs true
     g.helper_specs true
     g.feature_specs true
