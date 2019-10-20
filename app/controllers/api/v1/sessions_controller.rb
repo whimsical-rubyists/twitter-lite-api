@@ -1,20 +1,19 @@
 # frozen_string_literal: true
 
 class Api::V1::SessionsController < Api::V1::ApiController
-  include SessionsHelpers
-
+  skip_before_action :authenticate_request, only: %i[create]
   before_action :find_user, only: %i[create]
 
   def create
-    # binding.pry
     if @user && @user.authenticate(sign_in_params[:password])
       log_in(@user)
-      render json: { 
+      render json: {
         message: "User logged in successfully",
         username: @user.username,
-        email: @user.email 
+        email: @user.email
       }, status: :ok
     else
+      log_out if logged_in?
       render json: { errors: ["Username or Password provided is wrong"] }, status: :unauthorized
     end
   end
