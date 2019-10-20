@@ -13,8 +13,7 @@ class Api::V1::SessionsController < Api::V1::ApiController
         email: @user.email
       }, status: :ok
     else
-      log_out if logged_in?
-      render json: { errors: ["Username or Password provided is wrong"] }, status: :unauthorized
+      not_authorized("Email/Password do not match!!")
     end
   end
 

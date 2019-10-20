@@ -4,6 +4,7 @@
 module SessionsHelpers
   def log_in(user)
     session[:user_id] = user.id
+    session[:expires_at] = Time.current + 2.hours
   end
 
   # get current user from session or cookies if remember_me is chosen
@@ -14,7 +15,14 @@ module SessionsHelpers
   end
 
   def logged_in?
+    check_session_expiry
     !current_user.nil?
+  end
+
+  def check_session_expiry
+    if session[:expires_at] < Time.current
+      reset_session
+    end
   end
 
   def log_out

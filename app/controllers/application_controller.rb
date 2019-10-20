@@ -6,12 +6,17 @@ class ApplicationController < ActionController::Base
   before_action :set_csrf_cookie
   include SessionsHelpers
 
-  rescue_from ActionController::InvalidAuthenticityToken do |exception|
-    log_out
-    render { message : "Your session has been revoked" }
-  end
+  rescue_from ActionController::InvalidAuthenticityToken, with: :not_authorized
+    
 
   def set_csrf_cookie
     cookies["CSRF-TOKEN"] = form_authenticity_token
+  end
+
+  private
+
+  def not_authorized(msg=nil)
+    log_out
+    render json: { error: msg ? msg : "Not authorized" }, status: :unauthorized
   end
 end
