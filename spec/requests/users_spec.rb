@@ -17,14 +17,14 @@ RSpec.describe "Users", type: :request do
     }
 
     it "successfully creates a user" do
-      post users_path, params: { user: FactoryBot.attributes_for(:user) }
+      post api_v1_users_path, params: { user: FactoryBot.attributes_for(:user) }
       expect(response).to have_http_status(201)
 
       expect(json_response["message"]).to eq("User created successfully")
     end
 
     it "returns error message when invalid details are provided" do
-      post users_path, params: { user: invalid_details }
+      post api_v1_users_path, params: { user: invalid_details }
       expect(response).to have_http_status(422)
 
       expect(json_response["errors"].length).to eq(5)
