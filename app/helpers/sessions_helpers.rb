@@ -20,7 +20,7 @@ module SessionsHelpers
   end
 
   def check_session_expiry
-    if session[:expires_at] < Time.current
+    if session[:expires_at].nil? || session[:expires_at] < Time.current
       reset_session
     end
   end

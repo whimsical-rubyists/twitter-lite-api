@@ -13,7 +13,7 @@ class Api::V1::SessionsController < Api::V1::ApiController
         email: @user.email
       }, status: :ok
     else
-      not_authorized("Email/Password do not match!!")
+      not_authorized("Username/Password do not match!!")
     end
   end
 
