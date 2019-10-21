@@ -17,7 +17,7 @@ RSpec.describe "Sessions", type: :request do
       post api_v1_login_path, params: { user: { username: "user", password: "Password" } }
 
       expect(response).to have_http_status(401)
-      expect(json_response["error"]).to eq("Username/Password do not match!!")
+      expect(json_response["error"]).to eq("Login credentials do not match!!")
     end
 
   end

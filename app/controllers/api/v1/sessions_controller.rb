@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Api::V1::SessionsController < Api::V1::ApiController
+  # include Error::ErrorHandler
+
   skip_before_action :authenticate_request, only: %i[create]
   before_action :find_user, only: %i[create]
 
@@ -13,7 +15,7 @@ class Api::V1::SessionsController < Api::V1::ApiController
         email: @user.email
       }, status: :ok
     else
-      not_authorized("Username/Password do not match!!")
+      not_authorized("Login credentials do not match!!")
     end
   end
 
@@ -25,10 +27,14 @@ class Api::V1::SessionsController < Api::V1::ApiController
   private
 
   def sign_in_params
-    params.require(:user).permit(:username, :password)
+    params.fetch(:user).permit(:username, :password, :email)
   end
 
   def find_user
-    @user = User.find_by_username(sign_in_params[:username])
+    @user = if sign_in_params[:username]
+      User.find_by_username(sign_in_params[:username])
+    elsif sign_in_params[:email]
+      User.find_by_email(sign_in_params[:email])
+    end
   end
 end
