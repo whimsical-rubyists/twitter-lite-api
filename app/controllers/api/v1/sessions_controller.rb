@@ -1,33 +1,38 @@
 # frozen_string_literal: true
 
 class Api::V1::SessionsController < Api::V1::ApiController
-  # include Error::ErrorHandler
-
   skip_before_action :authenticate_request, only: %i[create]
   before_action :find_user, only: %i[create]
 
   def create
     if @user && @user.authenticate(sign_in_params[:password])
       log_in(@user)
-      render json: {
+      response = {
         message: "User logged in successfully",
         username: @user.username,
         email: @user.email
-      }, status: :ok
+      }
+      render_response(response)
     else
-      not_authorized("Login credentials do not match!!")
+      response = {
+        error: "Login credentials do not match!!"
+      }
+      render_response(response, :unauthorized)
     end
   end
 
   def destroy
     log_out if logged_in?
-    render json: { message: "Logged out successfully!" }, status: :ok
+    response = {
+      message: "Logged out successfully!"
+    }
+    render_response(response)
   end
 
   private
 
   def sign_in_params
-    params.fetch(:user, {}).permit(:username, :password, :email)
+    params.require(:user).permit(:username, :password, :email)
   end
 
   def find_user

@@ -2,21 +2,20 @@
 
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format.json? }
+  include SessionsHelpers
+  include Response
+  include ErrorHandler
 
   before_action :set_csrf_cookie
-  include SessionsHelpers
 
-  rescue_from ActionController::InvalidAuthenticityToken, with: :not_authorized
-
+  private
 
   def set_csrf_cookie
     cookies["CSRF-TOKEN"] = form_authenticity_token
   end
 
-  private
-
-  def not_authorized(msg = nil)
+  def not_authorized(msg)
     log_out
-    render json: { error: msg ? msg : "Not authorized" }, status: :unauthorized
+    render_response(msg, status = :unauthorized)
   end
 end
