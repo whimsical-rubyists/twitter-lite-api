@@ -27,7 +27,7 @@ class Api::V1::SessionsController < Api::V1::ApiController
   private
 
   def sign_in_params
-    params.fetch(:user).permit(:username, :password, :email)
+    params.fetch(:user, {}).permit(:username, :password, :email)
   end
 
   def find_user
