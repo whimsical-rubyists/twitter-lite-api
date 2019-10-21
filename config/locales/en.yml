@@ -31,3 +31,13 @@
 
 en:
   hello: "Hello world"
+
+  users:
+    create:
+      success: "User created successfully"
+
+  activerecord:
+    errors:
+      messages:
+        bad_email: "is invalid. Use this format: user@example.com"
+        bad_password: "is invalid. A strong password should containt 6-10 characters, have a small case letter, an upper case letter and a digit."
