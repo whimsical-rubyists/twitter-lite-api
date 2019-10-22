@@ -14,8 +14,10 @@ class ApplicationController < ActionController::Base
     cookies["CSRF-TOKEN"] = form_authenticity_token
   end
 
-  def not_authorized(msg)
-    log_out
-    render_response(msg, status = :unauthorized)
+  private
+
+  def not_authorized(msg = nil)
+    log_out if logged_in?
+    render json: { error: msg ? msg : "Not authorized" }, status: :unauthorized
   end
 end

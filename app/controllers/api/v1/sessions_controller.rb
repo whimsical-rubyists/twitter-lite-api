@@ -7,6 +7,7 @@ class Api::V1::SessionsController < Api::V1::ApiController
   def create
     if @user && @user.authenticate(sign_in_params[:password])
       log_in(@user)
+      remember(@user) if sign_in_params[:remember_me]
       response = {
         message: "User logged in successfully",
         username: @user.username,
@@ -32,7 +33,7 @@ class Api::V1::SessionsController < Api::V1::ApiController
   private
 
   def sign_in_params
-    params.require(:user).permit(:username, :password, :email)
+    params.require(:user).permit(:username, :password, :email, :remember_me)
   end
 
   def find_user
