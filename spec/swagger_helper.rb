@@ -16,10 +16,10 @@ RSpec.configure do |config|
     'v1/swagger.json' => {
       swagger: '2.0',
       info: {
-        title: 'API V1',
+        title: 'Twitter Lite API V1',
         version: 'v1'
       },
-      paths: {}
+      basePath: '/api/v1'
     }
   }
 end
