@@ -6,6 +6,72 @@
   },
   "basePath": "/api/v1",
   "paths": {
+    "/login": {
+      "post": {
+        "summary": "Login a user",
+        "tags": [
+          "Sessions"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "required": [
+                "user",
+                "username",
+                "password"
+              ],
+              "properties": {
+                "user": {
+                  "type": "object",
+                  "required": true,
+                  "properties": {
+                    "username": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "password": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User logged in successfully"
+          }
+        }
+      }
+    },
+    "/logout": {
+      "delete": {
+        "summary": "Logout a user",
+        "tags": [
+          "Sessions"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Logged out successfully"
+          }
+        }
+      }
+    },
     "/users": {
       "post": {
         "summary": "Sign Up a user",
