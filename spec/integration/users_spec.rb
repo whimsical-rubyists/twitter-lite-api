@@ -1,26 +1,34 @@
-require 'swagger_helper'
+# frozen_string_literal: true
 
-describe 'Twitter Lite API' do
+require "swagger_helper"
 
-  path '/users' do
+describe "Twitter Lite API" do
 
-    post 'Sign Up a user' do
-      tags 'Userss'
-      consumes 'application/json'
+  path "/users" do
+
+    post "Sign Up a user" do
+      tags "Users"
+      consumes "application/json"
+      produces "application/json"
       parameter name: :user, in: :body, schema: {
         type: :object,
+        required: true,
         properties: {
           user: {
-            username: { type: :string },
-            email: { type: :string },
-            password: { type: :string }
+            type: :object,
+            required: true,
+            properties: {
+              username: { type: :string },
+              email: { type: :string },
+              password: { type: :string }
+            }
           }
         },
-        required: [ 'username', 'email', 'password' ]
+        required: ["user", "username", "email", "password"]
       }
 
-      response '201', 'user created' do
-        let(:user) { { user: { username: "Kyalo", email: "kyalo@example.com", password: "Password12"}} }
+      response "201", "User created successfully" do
+        let(:user) { { user: { username: "Kyalo", email: "kyalo@example.com", password: "Password12" } } }
         run_test!
       end
     end

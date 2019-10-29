@@ -10,9 +10,12 @@
       "post": {
         "summary": "Sign Up a user",
         "tags": [
-          "Userss"
+          "Users"
         ],
         "consumes": [
+          "application/json"
+        ],
+        "produces": [
           "application/json"
         ],
         "parameters": [
@@ -21,30 +24,35 @@
             "in": "body",
             "schema": {
               "type": "object",
-              "properties": {
-                "user": {
-                  "username": {
-                    "type": "string"
-                  },
-                  "email": {
-                    "type": "string"
-                  },
-                  "password": {
-                    "type": "string"
-                  }
-                }
-              },
               "required": [
+                "user",
                 "username",
                 "email",
                 "password"
-              ]
+              ],
+              "properties": {
+                "user": {
+                  "type": "object",
+                  "required": true,
+                  "properties": {
+                    "username": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "password": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
             }
           }
         ],
         "responses": {
           "201": {
-            "description": "user created"
+            "description": "User created successfully"
           }
         }
       }
