@@ -12,6 +12,7 @@ Rails.application.configure do
   config.eager_load = false
 
   # Show full error reports.
+  # in prod this is set to false so clients only see errors from en.yml
   config.consider_all_requests_local = true
 
   # Enable/disable caching. By default caching is disabled.
