@@ -15,7 +15,6 @@ RSpec.describe "Sessions", type: :request do
 
     it "successfuly logs user in and rememebers" do
       create_logged_remember_in_user
-      # binding.pry
       expect(cookies[:remember_token]).to be_truthy
       expect(response).to have_http_status(200)
     end
