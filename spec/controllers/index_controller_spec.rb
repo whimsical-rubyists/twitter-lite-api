@@ -14,7 +14,7 @@ RSpec.describe Api::V1::IndexController, type: :controller do
 
     cookies["remember_token"] = remember_token
     cookies["user_id"] = my_cookies[:user_id]
-    
+
     get :index
     expect(response).to have_http_status(200)
   end
