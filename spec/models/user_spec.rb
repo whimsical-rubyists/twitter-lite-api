@@ -54,4 +54,14 @@ RSpec.describe User, type: :model do
       it { expect(:remember_token.nil?).to be false }
     end
   end
+
+  describe "Can remember users" do
+    it "authenticates users by rememmber token" do
+      user = create(:user, username: "testuser", password: "Password12")
+      user.remember
+      remember_token = user.remember_token
+      expect(user.authenticated?(remember_token)).to be(true)
+      expect(user.authenticated?("wrongtoken")).to be(false)
+    end
+  end
 end
