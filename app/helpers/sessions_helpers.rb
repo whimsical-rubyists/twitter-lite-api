@@ -25,7 +25,9 @@ module SessionsHelpers
   end
 
   def logged_in?
-    check_session_expiry
+    unless session[:user_id].nil?
+      check_session_expiry
+    end
     !current_user.nil?
   end
 

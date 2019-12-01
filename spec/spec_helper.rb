@@ -16,8 +16,13 @@
 #
 
 require "coveralls"
+require "simplecov"
 
-Coveralls.wear!
+SimpleCov.formatter = Coveralls::SimpleCov::Formatter
+SimpleCov.start
+
+
+# Coveralls.wear!
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
