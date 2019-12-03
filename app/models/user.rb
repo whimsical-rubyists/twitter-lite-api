@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: users
@@ -11,11 +10,13 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  remember_digest :string(255)
+#  email_confirmed :boolean          default("0")
+#  confirm_token   :string(255)
 #
 
 class User < ApplicationRecord
   attr_accessor :remember_token
-  before_create :set_uuid
+  before_create :set_uuid, :confirmation_token
   before_save :downcase_email
 
   has_secure_password
@@ -57,5 +58,19 @@ class User < ApplicationRecord
 
   def forget
     update_attribute(:remember_digest, nil)
+  end
+
+  def email_activation
+    self.email_confirmed = true
+    self.confirm_token = nil
+    save!(:validate => false)
+  end
+
+  private
+
+  def confirmation_token
+    if self.confirm_token.blank?
+      self.confirm_token = SecureRandom.urlsafe_base64.to_s
+    end
   end
 end

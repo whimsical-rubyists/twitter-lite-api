@@ -6,9 +6,13 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       root to: "index#indexv1"
-      resources :users, only: %i[create]
+      resources :users, only: %i[create] do
+      member do
+        get :confirm_email
+      end
       post "login", to: "sessions#create", as: "login"
       delete "logout", to: "sessions#destroy", as: "logout"
+      end
     end
   end
 
