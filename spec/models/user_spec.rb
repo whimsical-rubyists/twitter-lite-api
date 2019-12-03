@@ -9,6 +9,7 @@
 #  password_digest :string(255)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  remember_digest :string(255)
 #
 
 # frozen_string_literal: true
@@ -21,6 +22,7 @@ RSpec.describe User, type: :model do
     let(:valid_email) { "valid@mail.com" }
     let(:invalid_password) { "assadadhgsjkhd" }
     let(:valid_password) { "Passwor9" }
+    let(:remember_token) { nil }
 
     let(:password_error) { "Password is invalid. A strong password should containt 6-10
     characters, have a small case letter, an upper case letter and a
@@ -45,6 +47,21 @@ RSpec.describe User, type: :model do
 
       it { should allow_value(valid_email).for(:email) }
       it { should allow_value(valid_password).for(:password) }
+    end
+
+    context "presence of secure password" do
+      it { should have_secure_password }
+      it { expect(:remember_token.nil?).to be false }
+    end
+  end
+
+  describe "Can remember users" do
+    it "authenticates users by rememmber token" do
+      user = create(:user, username: "testuser", password: "Password12")
+      user.remember
+      remember_token = user.remember_token
+      expect(user.authenticated?(remember_token)).to be(true)
+      expect(user.authenticated?("wrongtoken")).to be(false)
     end
   end
 end
