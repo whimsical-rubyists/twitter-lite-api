@@ -2,7 +2,7 @@
 
 require "swagger_helper"
 
-describe "Twitter Lite API" do
+xdescribe "Twitter Lite API" do
 
   path "/login" do
 
@@ -28,7 +28,13 @@ describe "Twitter Lite API" do
       }
 
       response "200", "User logged in successfully" do
+        User.create(username: "testuser", password: "Password12")
         let(:user) { { user: { username: "Kyalo", email: "kyalo@example.com", password: "Password12" } } }
+        run_test!
+      end
+
+      response "401", "Login credentials do not match!!" do
+        let(:user) { { user: { username: "", email: "kyalo@example.com", password: "pp" } } }
         run_test!
       end
     end
@@ -42,6 +48,11 @@ describe "Twitter Lite API" do
 
       response "200", "Logged out successfully" do
         let(:user) { { user: { username: "Kyalo", email: "kyalo@example.com", password: "Password12" } } }
+        run_test!
+      end
+      
+      response "401", "Login credentials do not match!!" do
+        let(:user) { { user: { username: "", email: "kyalo@example.com", password: "pp" } } }
         run_test!
       end
     end
