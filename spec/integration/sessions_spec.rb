@@ -50,7 +50,7 @@ xdescribe "Twitter Lite API" do
         let(:user) { { user: { username: "Kyalo", email: "kyalo@example.com", password: "Password12" } } }
         run_test!
       end
-      
+
       response "401", "Login credentials do not match!!" do
         let(:user) { { user: { username: "", email: "kyalo@example.com", password: "pp" } } }
         run_test!
