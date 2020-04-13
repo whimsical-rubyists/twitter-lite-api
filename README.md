@@ -26,7 +26,11 @@ Ensure you have Ruby-2.6.4,  Rails 6.0.0 and MySQL Server installed.
       bundle install
     ```
 
-  3. Change the `config/database.yml` file to refelect the username and password for your database.
+  3. Copy `.env.template` as `.env` and edit the values to correspond to your local settings.
+
+    ```bash
+      cp .env.template .env
+    ```
 
   4. Create the database and run migrations.
 
