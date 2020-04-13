@@ -1,0 +1,4 @@
+Hi <%= @user.username %>
+
+<p>Thanks for registering! Please click the link below to complete your registration</p>
+<%= confirm_email(@user.confirm_token) %>

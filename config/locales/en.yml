@@ -64,7 +64,8 @@ en:
 
   users:
     create:
-      success: "User created successfully"
+      success: "Registration completed! Please confirm your email address"
+      error: "User does not exist"
 
   activerecord:
     errors:

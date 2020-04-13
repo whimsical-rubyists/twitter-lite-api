@@ -6,14 +6,18 @@ class Api::V1::SessionsController < Api::V1::ApiController
 
   def create
     if @user && @user.authenticate(sign_in_params[:password])
-      log_in(@user)
-      remember(@user) if sign_in_params[:remember_me]
-      response = {
-        message: "User logged in successfully",
-        username: @user.username,
-        email: @user.email
-      }
-      render_response(response)
+      if user.email_confirmed
+        log_in(@user)
+        remember(@user) if sign_in_params[:remember_me]
+        response = {
+          message: "User logged in successfully",
+          username: @user.username,
+          email: @user.email
+        }
+        render_response(response)
+      else
+        flash[:error] = "Please activate your account first by confirming your email"
+      end
     else
       response = {
         error: "Login credentials do not match!!"
