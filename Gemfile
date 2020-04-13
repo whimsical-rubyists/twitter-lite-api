@@ -33,7 +33,7 @@ gem "rswag-ui"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'dotenv-rails'
+  gem "dotenv-rails"
   gem "annotate"
   gem "byebug", platforms: %i[mri mingw x64_mingw]
   gem "factory_bot_rails"

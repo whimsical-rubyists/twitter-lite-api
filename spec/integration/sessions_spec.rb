@@ -2,7 +2,11 @@
 
 require "swagger_helper"
 
-xdescribe "Twitter Lite API" do
+describe "Twitter Lite API" do
+
+  before(:each) do
+    create_user
+  end
 
   path "/login" do
 
@@ -19,7 +23,7 @@ xdescribe "Twitter Lite API" do
             required: true,
             properties: {
               username: { type: :string },
-              email: { type: :string },
+              email: { type: :string, nullable: true },
               password: { type: :string }
             }
           }
@@ -28,8 +32,8 @@ xdescribe "Twitter Lite API" do
       }
 
       response "200", "User logged in successfully" do
-        User.create(username: "testuser", password: "Password12")
-        let(:user) { { user: { username: "Kyalo", email: "kyalo@example.com", password: "Password12" } } }
+
+        let(:user) { { user: { username: "testuser", password: "Password12" } } }
         run_test!
       end
 
@@ -47,11 +51,16 @@ xdescribe "Twitter Lite API" do
       produces "application/json"
 
       response "200", "Logged out successfully" do
-        let(:user) { { user: { username: "Kyalo", email: "kyalo@example.com", password: "Password12" } } }
+
+        before do
+          user = User.find_by_username("testuser")
+          login(user)
+        end
+
         run_test!
       end
 
-      response "401", "Login credentials do not match!!" do
+      response "401", "You are not authenticated, kindly login first" do
         let(:user) { { user: { username: "", email: "kyalo@example.com", password: "pp" } } }
         run_test!
       end

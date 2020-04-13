@@ -38,7 +38,8 @@
                       "type": "string"
                     },
                     "email": {
-                      "type": "string"
+                      "type": "string",
+                      "nullable": true
                     },
                     "password": {
                       "type": "string"
@@ -52,6 +53,9 @@
         "responses": {
           "200": {
             "description": "User logged in successfully"
+          },
+          "401": {
+            "description": "Login credentials do not match!!"
           }
         }
       }
@@ -68,6 +72,9 @@
         "responses": {
           "200": {
             "description": "Logged out successfully"
+          },
+          "401": {
+            "description": "You are not authenticated, kindly login first"
           }
         }
       }
