@@ -20,7 +20,7 @@ RSpec.describe "Users", type: :request do
       post api_v1_users_path, params: { user: FactoryBot.attributes_for(:user) }
       expect(response).to have_http_status(201)
 
-      expect(json_response["message"]).to eq("User created successfully")
+      expect(json_response["message"]).to eq("User created successfully.")
     end
 
     it "returns error message when invalid details are provided" do

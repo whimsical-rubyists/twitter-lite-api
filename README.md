@@ -12,41 +12,41 @@ Ensure you have Ruby-2.6.4,  Rails 6.0.0 and MySQL Server installed.
 
   01. Clone this Repo and `cd` to the project folder.
 
-    ```bash
-      git clone https://github.com/whimsical-rubyists/twitter-lite-api.git
-    ```
+  ```bash
+    git clone https://github.com/whimsical-rubyists/twitter-lite-api.git
+  ```
 
-    ```bash
-    cd twitter-lite-api
-    ```
+  ```bash
+  cd twitter-lite-api
+  ```
 
   2. Install all dependencies.
 
-    ```bash
-      bundle install
-    ```
+  ```bash
+    bundle install
+  ```
 
   3. Copy `.env.template` as `.env` and edit the values to correspond to your local settings.
 
-    ```bash
-      cp .env.template .env
-    ```
+  ```bash
+    cp .env.template .env
+  ```
 
   4. Create the database and run migrations.
 
-    ```bash
-      rails db:create
-    ```
+  ```bash
+    rails db:create
+  ```
 
-    ```bash
-      rails db:migrate
-    ```
+  ```bash
+    rails db:migrate
+  ```
 
   5. Start the server.
 
-    ```bash
-      rails s
-    ```
+  ```bash
+    rails s
+  ```
 
   6. You've started the server on port 3000. Read up on the documentation in from the following URL: `http://localhost:3000/api-docs`.
 

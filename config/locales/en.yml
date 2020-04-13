@@ -30,6 +30,10 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  info:
+    welcome:
+      index: "Welcome to Twitter Lite"
+      index_v1: "Welcome to Twitter Lite V1"
   errors:
     application:
       not_found:
@@ -64,7 +68,15 @@ en:
 
   users:
     create:
-      success: "User created successfully"
+      success: "User created successfully."
+  
+  sessions:
+    login:
+      success: "User logged in successfully."
+      failure: "Login credentials do not match!!"
+    logout:
+        failure: "You are not authenticated, kindly login first."
+        success: "Logged out successfully!"
 
   activerecord:
     errors:
