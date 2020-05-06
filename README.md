@@ -50,6 +50,10 @@ Ensure you have Ruby-2.6.4,  Rails 6.0.0 and MySQL Server installed.
 
   6. You've started the server on port 3000. Read up on the documentation in from the following URL: `http://localhost:3000/api-docs`.
 
+## Contributing
+
+Refer to the [contributing guide](/CONTRIBUTING.md)
+
 ## Authors
 
 - Gloria Odipo
