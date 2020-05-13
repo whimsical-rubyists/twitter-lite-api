@@ -8,7 +8,7 @@ module Api
 
     def authenticate_request
       return if logged_in?
-      render json: { "message": "You are not authenticated, kindly login first." }, status: :unauthorized
+      render json: { "message": I18n.t("sessions.logout.failure") }, status: :unauthorized
     end
   end
 end

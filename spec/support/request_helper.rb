@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+def create_user
+  create(:user, username: "testuser", password: "Password12")
+end
+
 def create_logged_in_user
   user = create(:user, username: "testuser", password: "Password12")
   post api_v1_login_path, params: { user: { username: user.username, password: "Password12" } }

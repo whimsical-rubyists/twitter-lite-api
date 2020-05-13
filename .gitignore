@@ -23,3 +23,6 @@
 
 # ignore coverage files
 coverage/*
+
+# ignore env config
+.env

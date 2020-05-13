@@ -9,14 +9,14 @@ class Api::V1::SessionsController < Api::V1::ApiController
       log_in(@user)
       remember(@user) if sign_in_params[:remember_me]
       response = {
-        message: "User logged in successfully",
+        message: I18n.t("sessions.login.success"),
         username: @user.username,
         email: @user.email
       }
       render_response(response)
     else
       response = {
-        error: "Login credentials do not match!!"
+        error: I18n.t("sessions.login.failure"),
       }
       render_response(response, :unauthorized)
     end
@@ -25,7 +25,7 @@ class Api::V1::SessionsController < Api::V1::ApiController
   def destroy
     log_out if logged_in?
     response = {
-      message: "Logged out successfully!"
+      message: I18n.t("sessions.logout.success"),
     }
     render_response(response)
   end

@@ -8,7 +8,7 @@ RSpec.describe "Sessions", type: :request do
       create_logged_in_user
       expect(cookies[:remember_token]).to be_falsey
       expect(response).to have_http_status(200)
-      expect(json_response["message"]).to eq("User logged in successfully")
+      expect(json_response["message"]).to eq("User logged in successfully.")
       expect(json_response["email"]). to eq(User.first.email)
       expect(json_response["username"]). to eq(User.first.username)
     end
