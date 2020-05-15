@@ -11,7 +11,8 @@ module Api
         # binding.pr
         user.confirmation_token
         if user.save
-          UserMailer.registration_confirmation(user).deliver_now
+          # binding.pry
+          UserMailer.registration_confirmation(user, user.confirm).deliver_later
           render json: { message: I18n.t("users.create.success") }, status: :created
         else
           render json: { errors: user.errors.full_messages },

@@ -26,3 +26,4 @@ coverage/*
 
 # ignore env config
 .env
+dump.rdb

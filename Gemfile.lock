@@ -69,6 +69,7 @@ GEM
     byebug (11.1.1)
     coderay (1.1.2)
     concurrent-ruby (1.1.6)
+    connection_pool (2.2.2)
     coveralls (0.8.23)
       json (>= 1.8, < 3)
       simplecov (~> 0.16.1)
@@ -153,6 +154,8 @@ GEM
     public_suffix (4.0.1)
     puma (3.12.4)
     rack (2.2.2)
+    rack-protection (2.0.8.1)
+      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (6.0.2.1)
@@ -187,6 +190,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     rb-readline (0.5.5)
+    redis (4.1.4)
     rspec (3.8.0)
       rspec-core (~> 3.8.0)
       rspec-expectations (~> 3.8.0)
@@ -233,6 +237,11 @@ GEM
     shellany (0.0.1)
     shoulda-matchers (4.1.2)
       activesupport (>= 4.2.0)
+    sidekiq (6.0.7)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      rack-protection (>= 2.0.0)
+      redis (>= 4.1.0)
     simplecov (0.16.1)
       docile (~> 1.1)
       json (>= 1.8, < 3)
@@ -284,6 +293,7 @@ DEPENDENCIES
   puma (~> 3.12)
   rails (~> 6.0.0)
   rb-readline
+  redis (~> 4.0)
   rspec-rails (~> 3.8)
   rspec_junit_formatter
   rswag-api
@@ -292,6 +302,7 @@ DEPENDENCIES
   rubocop
   rubocop-performance
   shoulda-matchers (~> 4.1)
+  sidekiq
   simplecov
   spring
   spring-watcher-listen (~> 2.0.0)

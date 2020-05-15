@@ -1,8 +1,13 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  require 'sidekiq/web'
+  
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
+
+  mount Sidekiq::Web => '/sidekiq'
+
   root to: "api/v1/index#index"
   
   namespace :api do
