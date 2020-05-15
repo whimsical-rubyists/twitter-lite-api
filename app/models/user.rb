@@ -12,11 +12,12 @@
 #  remember_digest :string(255)
 #  email_confirmed :boolean          default("0")
 #  confirm_digest  :string(255)
+#  confirmed_at    :datetime         default("2020-05-15 16:26:42")
 #
 
 class User < ApplicationRecord
   attr_accessor :remember_token, :confirm
-  before_create :set_uuid, :confirmation_token
+  before_create :set_uuid#, :confirmation_token
   before_save :downcase_email
 
   has_secure_password
@@ -51,7 +52,7 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, User.digest(remember_token))
   end
 
-  def validate_token?(attribute, token)
+  def token_valid?(attribute, token)
     digest = send("#{attribute}_digest")
     return false if digest.nil?
 
@@ -64,7 +65,7 @@ class User < ApplicationRecord
 
   def email_activate!
     self.email_confirmed = true
-    self.confirm_at = time.now
+    self.confirmed_at = Time.now
     # save!(:validate => false)
   end
 

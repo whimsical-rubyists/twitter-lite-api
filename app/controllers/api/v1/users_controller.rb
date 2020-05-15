@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     class UsersController < Api::V1::ApiController
@@ -6,6 +8,8 @@ module Api
 
       def create
         user = User.new(user_params)
+        # binding.pr
+        user.confirmation_token
         if user.save
           UserMailer.registration_confirmation(user).deliver_now
           render json: { message: I18n.t("users.create.success") }, status: :created
@@ -16,12 +20,12 @@ module Api
       end
 
       def confirm_email
-        if @user && !@user.email_confirmed && @user.validate_token(:confrim, params[:token])
-          @user.confirm_email!
+        if @user && !@user.email_confirmed && @user.token_valid?(:confirm, params[:token])
+          @user.email_activate!
           log_in @user
-          render json: { message: I18n.t("users.confirm.success")}, status: :ok
+          render json: { message: I18n.t("users.confirm.success") }, status: :ok
         else
-          render json: { message: I18n.t("users.confirm.failure")}, status: :unprocessable_entity
+          render json: { message: I18n.t("users.confirm.failure") }, status: :unprocessable_entity
         end
       end
 
@@ -31,7 +35,7 @@ module Api
         params.require(:user).permit(:username, :email, :password)
       end
 
-      def find_user
+      def find_user_by_email
         @user = User.find_by_email(params[:email])
       end
     end

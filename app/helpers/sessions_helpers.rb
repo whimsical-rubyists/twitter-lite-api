@@ -8,7 +8,7 @@ module SessionsHelpers
   end
 
   def log_in_user_from_cookies(user)
-    if user && user.validate_token?(:remember, cookies[:remember_token])
+    if user && user.token_valid?(:remember, cookies[:remember_token])
       log_in(user)
       @current_user = user
     end

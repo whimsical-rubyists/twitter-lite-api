@@ -12,6 +12,7 @@
 #  remember_digest :string(255)
 #  email_confirmed :boolean          default("0")
 #  confirm_digest  :string(255)
+#  confirmed_at    :datetime         default("2020-05-15 16:26:42")
 #
 
 # frozen_string_literal: true
