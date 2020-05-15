@@ -69,6 +69,9 @@ en:
   users:
     create:
       success: "User created successfully."
+    confirm:
+      success: "Email confirmed successfully."
+      failure: "Email confirmation failed."
   
   sessions:
     login:

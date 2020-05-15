@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       resources :users, only: %i[create]
       post "login", to: "sessions#create", as: "login"
       delete "logout", to: "sessions#destroy", as: "logout"
+      get "confirm/:token", to: "users#confirm_email", as: "confirm"
     end
   end
 

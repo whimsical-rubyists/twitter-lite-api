@@ -10,6 +10,8 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  remember_digest :string(255)
+#  email_confirmed :boolean          default("0")
+#  confirm_digest  :string(255)
 #
 
 # frozen_string_literal: true

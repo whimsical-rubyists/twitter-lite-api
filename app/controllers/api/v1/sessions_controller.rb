@@ -6,14 +6,15 @@ class Api::V1::SessionsController < Api::V1::ApiController
 
   def create
     if @user && @user.authenticate(sign_in_params[:password])
-      log_in(@user)
-      remember(@user) if sign_in_params[:remember_me]
-      response = {
-        message: I18n.t("sessions.login.success"),
-        username: @user.username,
-        email: @user.email
-      }
-      render_response(response)
+      if user.email_confirmed
+        log_in(@user)
+        remember(@user) if sign_in_params[:remember_me]
+        response = {
+          message: I18n.t("sessions.login.success"),
+          username: @user.username,
+          email: @user.email
+        }
+        render_response(response)
     else
       response = {
         error: I18n.t("sessions.login.failure"),

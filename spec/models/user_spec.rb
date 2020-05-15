@@ -10,6 +10,8 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  remember_digest :string(255)
+#  email_confirmed :boolean          default("0")
+#  confirm_digest  :string(255)
 #
 
 # frozen_string_literal: true
@@ -60,8 +62,8 @@ RSpec.describe User, type: :model do
       user = create(:user, username: "testuser", password: "Password12")
       user.remember
       remember_token = user.remember_token
-      expect(user.authenticated?(remember_token)).to be(true)
-      expect(user.authenticated?("wrongtoken")).to be(false)
+      expect(user.validate_token?(:remember, remember_token)).to be(true)
+      expect(user.validate_token?("wrongtoken")).to be(false)
     end
   end
 end

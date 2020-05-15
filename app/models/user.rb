@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: users
@@ -11,11 +10,13 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  remember_digest :string(255)
+#  email_confirmed :boolean          default("0")
+#  confirm_digest  :string(255)
 #
 
 class User < ApplicationRecord
-  attr_accessor :remember_token
-  before_create :set_uuid
+  attr_accessor :remember_token, :confirm
+  before_create :set_uuid, :confirmation_token
   before_save :downcase_email
 
   has_secure_password
@@ -50,12 +51,25 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, User.digest(remember_token))
   end
 
-  def authenticated?(remember_token)
-    return false if remember_token.nil?
-    BCrypt::Password.new(remember_digest).is_password?(remember_token)
+  def validate_token?(attribute, token)
+    digest = send("#{attribute}_digest")
+    return false if digest.nil?
+
+    BCrypt::Password.new(digest).is_password?(token)
   end
 
   def forget
     update_attribute(:remember_digest, nil)
+  end
+
+  def email_activate!
+    self.email_confirmed = true
+    self.confirm_at = time.now
+    # save!(:validate => false)
+  end
+
+  def confirmation_token
+    self.confirm = User.new_token
+    update_attribute(:confirm_digest, User.digest(confirm))
   end
 end
